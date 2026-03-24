@@ -1,0 +1,14 @@
+[project]
+name = "meta_control_rl"
+version = "0.1.0"
+description = "Uncertainty-driven meta-control in RL"
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "pygame",
+    "pyyaml",
+    "tqdm"
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

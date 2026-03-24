@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: meta_control_rl
+Version: 0.1.0
+Summary: Uncertainty-driven meta-control in RL
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: pygame
+Requires-Dist: pyyaml
+Requires-Dist: tqdm

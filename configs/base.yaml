@@ -1,0 +1,16 @@
+env:
+  n_arms: 4
+  reward_probs: [0.2, 0.5, 0.7, 0.3]
+  volatility: true
+  switch_interval: 100
+
+agent:
+  alpha: 0.1
+  epsilon: 0.1
+  epsilon_min: 0.01
+  epsilon_max: 0.5
+  uncertainty_scale: 2.0
+
+simulation:
+  n_steps: 1000
+  seed: 42
