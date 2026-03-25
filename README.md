@@ -1,9 +1,9 @@
-# 🧠 Meta-Control via Uncertainty  
+#  Meta-Control via Uncertainty  
 ### When Should an Agent Explore?
 
 ---
 
-## 📌 Overview
+##  Overview
 
 This project implements a minimal computational model of **meta-control in decision-making**: an agent that learns **not only what to do**, but also **when to explore vs exploit**.
 
@@ -13,7 +13,7 @@ We demonstrate this in a **multi-armed bandit task** under both stable and volat
 
 ---
 
-## 🧩 Problem Setting
+##  Problem Setting
 
 We consider a standard **K-armed bandit**:
 
@@ -25,7 +25,7 @@ In volatile environments, these probabilities can change over time.
 
 ---
 
-## 🤖 Learning Rule
+##  Learning Rule
 
 The agent maintains value estimates \( Q(a) \) for each action.
 
@@ -41,7 +41,7 @@ where:
 
 ---
 
-## 🔀 Exploration Strategy
+##  Exploration Strategy
 
 ### Baseline (Fixed Exploration)
 
@@ -54,7 +54,7 @@ This uses a **fixed** exploration rate \( \epsilon \).
 
 ---
 
-## 🧠 Meta-Control: Adaptive Exploration
+##  Meta-Control: Adaptive Exploration
 
 In this project, exploration is controlled dynamically:
 
@@ -68,7 +68,7 @@ where:
 
 ---
 
-## 📊 Uncertainty Signals
+##  Uncertainty Signals
 
 We combine multiple sources of uncertainty:
 
@@ -128,7 +128,7 @@ This enables the agent to:
 
 ---
 
-## ⏳ Temporal Smoothing
+##  Temporal Smoothing
 
 To avoid noisy behavior, we smooth exploration:
 
@@ -142,7 +142,7 @@ This ensures:
 
 ---
 
-## 🎯 Key Result
+##  Key Result
 
 Across multiple runs:
 
@@ -152,7 +152,7 @@ Across multiple runs:
 
 ---
 
-## 🧠 Interpretation
+##  Interpretation
 
 The agent integrates:
 
@@ -165,7 +165,7 @@ The agent integrates:
 
 ---
 
-## 🎮 Demo
+##  Demo
 
 A Pygame simulation visualizes the agent:
 
@@ -177,18 +177,21 @@ You can observe:
 - exploration → learning → exploitation  
 - re-exploration after change  
 
-### 🕹️ Controls
+### ️ Controls
 
 - Press `C` to trigger a sudden change in the environment (volatility)
 
 ---
 
-## 🚀 How to Run
+##  How to Run
 
 ```bash
-cd /Users/odanson/meta-control-rl
+git clone https://github.com/Odanson/meta-control-rl.git
+cd meta-control-rl
+
 python3 -m venv .venv
 source .venv/bin/activate
+
 pip install -e .
 pip install pygame pytest
 
