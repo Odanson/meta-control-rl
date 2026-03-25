@@ -3,7 +3,7 @@
 
 ---
 
-##  Overview
+## Overview
 
 This project implements a minimal computational model of **meta-control in decision-making**: an agent that learns **not only what to do**, but also **when to explore vs exploit**.
 
@@ -13,62 +13,62 @@ We demonstrate this in a **multi-armed bandit task** under both stable and volat
 
 ---
 
-##  Problem Setting
+## Problem Setting
 
 We consider a standard **K-armed bandit**:
 
-- At each time step \( t \), the agent selects an action \( a_t \in \{1, ..., K\} \)
-- It receives a reward \( r_t \in \{0,1\} \)
-- Each arm has an unknown reward probability \( p_a \)
+- At each time step $t$, the agent selects an action $a_t \in \{1, \dots, K\}$
+- It receives a reward $r_t \in \{0,1\}$
+- Each arm has an unknown reward probability $p_a$
 
 In volatile environments, these probabilities can change over time.
 
 ---
 
-##  Learning Rule
+## Learning Rule
 
-The agent maintains value estimates \( Q(a) \) for each action.
+The agent maintains value estimates $Q(a)$ for each action.
 
 We use a simple incremental update:
 
-\[
-Q_{t+1}(a) = Q_t(a) + \alpha \left( r_t - Q_t(a) \right)
-\]
+$$
+Q_{t+1}(a) = Q_t(a) + \alpha \big( r_t - Q_t(a) \big)
+$$
 
 where:
-- \( \alpha \) is the learning rate  
-- \( r_t - Q_t(a) \) is the **prediction error**
+- $\alpha$ is the learning rate  
+- $r_t - Q_t(a)$ is the **prediction error**
 
 ---
 
-##  Exploration Strategy
+## Exploration Strategy
 
 ### Baseline (Fixed Exploration)
 
 A standard approach is **epsilon-greedy**:
 
-- With probability \( \epsilon \): explore (random action)
-- Otherwise: exploit (choose \( \arg\max Q(a) \))
+- With probability $\epsilon$: explore (random action)
+- Otherwise: exploit (choose $\arg\max_a Q(a)$)
 
-This uses a **fixed** exploration rate \( \epsilon \).
+This uses a **fixed** exploration rate $\epsilon$.
 
 ---
 
-##  Meta-Control: Adaptive Exploration
+## Meta-Control: Adaptive Exploration
 
 In this project, exploration is controlled dynamically:
 
-\[
-\epsilon_t = \epsilon_{\min} + \lambda \cdot U_t
-\]
+$$
+\epsilon_t = \epsilon_{\min} + \lambda \, U_t
+$$
 
 where:
-- \( U_t \) = uncertainty signal  
-- \( \lambda \) = scaling factor  
+- $U_t$ = uncertainty signal  
+- $\lambda$ = scaling factor  
 
 ---
 
-##  Uncertainty Signals
+## Uncertainty Signals
 
 We combine multiple sources of uncertainty:
 
@@ -76,33 +76,33 @@ We combine multiple sources of uncertainty:
 
 ### 1. Sampling Uncertainty (Counts)
 
-\[
+$$
 U_{\text{count}}(a) = \frac{1}{N(a) + 1}
-\]
+$$
 
-- \( N(a) \): number of times action \( a \) has been selected  
-- Less-sampled actions → higher uncertainty  
+- $N(a)$: number of times action $a$ has been selected  
+- Less-sampled actions $\Rightarrow$ higher uncertainty  
 
 ---
 
 ### 2. Value Ambiguity (Gap)
 
-\[
-U_{\text{value}} = \frac{1}{|Q_{\text{best}} - Q_{\text{second-best}}| + \varepsilon}
-\]
+$$
+U_{\text{value}} = \frac{1}{\lvert Q_{\text{best}} - Q_{\text{second-best}} \rvert + \varepsilon}
+$$
 
-(Here \(\varepsilon\) is a small constant for numerical stability, not the exploration rate.)
+(Here $\varepsilon$ is a small constant for numerical stability, not the exploration rate.)
 
-- Small gap → high ambiguity  
+- Small gap $\Rightarrow$ high ambiguity  
 - Encourages exploration when options are similar  
 
 ---
 
 ### 3. Combined Uncertainty
 
-\[
-U_t = w_1 U_{\text{count}} + w_2 U_{\text{value}}
-\]
+$$
+U_t = w_1 \, U_{\text{count}} + w_2 \, U_{\text{value}}
+$$
 
 ---
 
@@ -110,16 +110,16 @@ U_t = w_1 U_{\text{count}} + w_2 U_{\text{value}}
 
 We model environmental change using **prediction error**:
 
-\[
-\delta_t = |r_t - Q_t(a_t)|
-\]
+$$
+\delta_t = \lvert r_t - Q_t(a_t) \rvert
+$$
 
 Large prediction error suggests:
 > “Something has changed”
 
 We implement **adaptive forgetting**:
 
-- If \( \delta_t > \theta \): strong reset  
+- If $\delta_t > \theta$: strong reset  
 - Otherwise: slow decay  
 
 This enables the agent to:
@@ -128,13 +128,13 @@ This enables the agent to:
 
 ---
 
-##  Temporal Smoothing
+## Temporal Smoothing
 
 To avoid noisy behavior, we smooth exploration:
 
-\[
-\epsilon_t^{\text{smooth}} = (1 - \beta)\epsilon_{t-1} + \beta \epsilon_t
-\]
+$$
+\epsilon_t^{\text{smooth}} = (1 - \beta)\,\epsilon_{t-1} + \beta\,\epsilon_t
+$$
 
 This ensures:
 - stable control  
@@ -142,7 +142,7 @@ This ensures:
 
 ---
 
-##  Key Result
+## Key Result
 
 Across multiple runs:
 
@@ -152,7 +152,7 @@ Across multiple runs:
 
 ---
 
-##  Interpretation
+## Interpretation
 
 The agent integrates:
 
@@ -165,7 +165,7 @@ The agent integrates:
 
 ---
 
-##  Demo
+## Demo
 
 A Pygame simulation visualizes the agent:
 
@@ -177,13 +177,13 @@ You can observe:
 - exploration → learning → exploitation  
 - re-exploration after change  
 
-### ️ Controls
+###️ Controls
 
 - Press `C` to trigger a sudden change in the environment (volatility)
 
 ---
 
-##  How to Run
+## How to Run
 
 ```bash
 git clone https://github.com/Odanson/meta-control-rl.git
@@ -202,7 +202,7 @@ python3 pygame_demo.py
 
 ---
 
-## 📦 Requirements
+## Requirements
 
 - Python 3.10+
 - numpy
@@ -211,10 +211,4 @@ python3 pygame_demo.py
 - pyyaml
 - tqdm
 
----
 
-## 🏁 Takeaway
-
-> Good exploration is not about being more random — it is about being *adaptive in when to be random*.
-
-This project provides a minimal, interpretable model of **uncertainty-driven cognitive control in decision-making**.
