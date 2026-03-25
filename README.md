@@ -106,7 +106,7 @@ $$
 
 ---
 
-## ⚡ Volatility & Surprise
+##  Volatility & Surprise
 
 We model environmental change using **prediction error**:
 
