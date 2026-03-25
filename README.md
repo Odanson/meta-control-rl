@@ -1,5 +1,3 @@
-
-
 # 🧠 Meta-Control via Uncertainty  
 ### When Should an Agent Explore?
 
@@ -90,8 +88,10 @@ U_{\text{count}}(a) = \frac{1}{N(a) + 1}
 ### 2. Value Ambiguity (Gap)
 
 \[
-U_{\text{value}} = \frac{1}{|Q_{\text{best}} - Q_{\text{second-best}}| + \epsilon}
+U_{\text{value}} = \frac{1}{|Q_{\text{best}} - Q_{\text{second-best}}| + \varepsilon}
 \]
+
+(Here \(\varepsilon\) is a small constant for numerical stability, not the exploration rate.)
 
 - Small gap → high ambiguity  
 - Encourages exploration when options are similar  
@@ -177,18 +177,36 @@ You can observe:
 - exploration → learning → exploitation  
 - re-exploration after change  
 
+### 🕹️ Controls
+
+- Press `C` to trigger a sudden change in the environment (volatility)
+
 ---
 
 ## 🚀 How to Run
 
 ```bash
-cd /Users/odanson/meta-control
+cd /Users/odanson/meta-control-rl
+python3 -m venv .venv
 source .venv/bin/activate
+pip install -e .
+pip install pygame pytest
 
 python3 analyze.py
 python3 evaluate_agents.py
 python3 pygame_demo.py
 ```
+
+---
+
+## 📦 Requirements
+
+- Python 3.10+
+- numpy
+- matplotlib
+- pygame
+- pyyaml
+- tqdm
 
 ---
 
